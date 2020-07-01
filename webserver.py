@@ -75,9 +75,9 @@ def instream(message):
     #print(message)
     bpm = runprocess(message['stream'])
     if bpm is not None:
-        print("Heart rate:")
-        print(bpm)
-    #emit('outresults', {'data': '56.3 bmp'})
+        #print("Heart rate:")
+        #print(bpm)
+        emit('outresults', {'bpm': bpm})
 
 if __name__ == '__main__':
     print("Starting server...")
