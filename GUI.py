@@ -31,7 +31,7 @@ class GUI(QMainWindow, QThread):
         self.dirname = ""
         print("Input: webcam")
         self.statusBar.showMessage("Input: webcam",5000)
-        self.btnOpen.setEnabled(False)
+        #self.btnOpen.setEnabled(False)
         self.process = Process()
         self.status = False
         self.frame = np.zeros((10,10,3),np.uint8)
@@ -52,22 +52,22 @@ class GUI(QMainWindow, QThread):
         self.btnStart.setFont(font)
         self.btnStart.clicked.connect(self.run)
         
-        self.btnOpen = QPushButton("Open", self)
-        self.btnOpen.move(230,520)
-        self.btnOpen.setFixedWidth(200)
-        self.btnOpen.setFixedHeight(50)
-        self.btnOpen.setFont(font)
-        self.btnOpen.clicked.connect(self.openFileDialog)
+        # self.btnOpen = QPushButton("Open", self)
+        # self.btnOpen.move(230,520)
+        # self.btnOpen.setFixedWidth(200)
+        # self.btnOpen.setFixedHeight(50)
+        # self.btnOpen.setFont(font)
+        # self.btnOpen.clicked.connect(self.openFileDialog)
         
-        self.cbbInput = QComboBox(self)
-        self.cbbInput.addItem("Webcam")
-        self.cbbInput.addItem("Video")
-        self.cbbInput.setCurrentIndex(0)
-        self.cbbInput.setFixedWidth(200)
-        self.cbbInput.setFixedHeight(50)
-        self.cbbInput.move(20,520)
-        self.cbbInput.setFont(font)
-        self.cbbInput.activated.connect(self.selectInput)
+        # self.cbbInput = QComboBox(self)
+        # self.cbbInput.addItem("Webcam")
+        # self.cbbInput.addItem("Video")
+        # self.cbbInput.setCurrentIndex(0)
+        # self.cbbInput.setFixedWidth(200)
+        # self.cbbInput.setFixedHeight(50)
+        # self.cbbInput.move(20,520)
+        # self.cbbInput.setFont(font)
+        # self.cbbInput.activated.connect(self.selectInput)
         #-------------------
         
         self.lblDisplay = QLabel(self) #label to show frame from camera
@@ -129,7 +129,7 @@ class GUI(QMainWindow, QThread):
         #config main window
         self.setGeometry(100,100,1160,640)
         #self.center()
-        self.setWindowTitle("Heart rate monitor")
+        self.setWindowTitle("Heartbit")
         self.show()
         
         
@@ -160,18 +160,18 @@ class GUI(QMainWindow, QThread):
         else: 
             event.ignore()
     
-    def selectInput(self):
-        self.reset()
-        if self.cbbInput.currentIndex() == 0:
-            self.input = self.webcam
-            print("Input: webcam")
-            self.btnOpen.setEnabled(False)
-            #self.statusBar.showMessage("Input: webcam",5000)
-        elif self.cbbInput.currentIndex() == 1:
-            self.input = self.video
-            print("Input: video")
-            self.btnOpen.setEnabled(True)
-            #self.statusBar.showMessage("Input: video",5000)
+    # def selectInput(self):
+    #     self.reset()
+    #     if self.cbbInput.currentIndex() == 0:
+    #         self.input = self.webcam
+    #         print("Input: webcam")
+    #         #self.btnOpen.setEnabled(False)
+    #         #self.statusBar.showMessage("Input: webcam",5000)
+    #     elif self.cbbInput.currentIndex() == 1:
+    #         self.input = self.video
+    #         print("Input: video")
+    #         self.btnOpen.setEnabled(True)
+    #         #self.statusBar.showMessage("Input: video",5000)
         
     
     def mousePressEvent(self, event):
@@ -221,7 +221,7 @@ class GUI(QMainWindow, QThread):
         self.process.frame_in = frame
         self.process.run()
         
-        cv2.imshow("Processed", frame)
+        #cv2.imshow("Processed", frame)
         
         self.frame = self.process.frame_out #get the frame to show in GUI
         self.f_fr = self.process.frame_ROI #get the face to show in GUI
@@ -266,8 +266,8 @@ class GUI(QMainWindow, QThread):
             self.status = True
             input.start()
             self.btnStart.setText("Stop")
-            self.cbbInput.setEnabled(False)
-            self.btnOpen.setEnabled(False)
+            #self.cbbInput.setEnabled(False)
+            #self.btnOpen.setEnabled(False)
             self.lblHR2.clear()
             while self.status == True:
                 self.main_loop()
@@ -275,7 +275,7 @@ class GUI(QMainWindow, QThread):
             self.status = False
             input.stop()
             self.btnStart.setText("Start")
-            self.cbbInput.setEnabled(True)
+            #self.cbbInput.setEnabled(True)
 
 
 if __name__ == '__main__':
